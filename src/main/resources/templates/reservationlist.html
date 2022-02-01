@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Volkshaus Restaurant Reservationen</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"></link>
+	</head>
+	<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">Volkshaus Restaurant</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		    <ul class="navbar-nav mr-auto">
+		      <li class="nav-item">
+		        <a class="nav-link" href="/#">Home </a>
+		      </li>
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Reservationen<span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">Über uns</a>
+		      </li>
+		      
+		    </ul>
+		    <form class="form-inline my-2 my-lg-0">
+		      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		    </form>
+		  </div>
+		</nav>
+		<div class="p-3">
+		<p></p>
+			<div th:switch="${listOfReservations}">
+				<h4 th:case="null"> Keine Reservationen vorhanden</h4>
+			<div th:case="*">
+			<table class="table table-striped">
+				<caption>Liste der Reservationen</caption>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Vorname</th>
+						<th>Nachname</th>
+						<th>E-Mail</th>
+						<th>Anzahl Personen</th>
+						<th>Bestätigt</th>
+						<th>Bearbeiten</th>
+						<th>Löschen</th>
+					</tr>
+				</thead>
+				<tbody>
+						<tr th:each="reservation : ${listOfReservations}">
+							<td><span th:text="${reservation.id}">ID</span></td>
+							<td><span th:text="${reservation.vorname}">Vorname</span></td>
+							<td><span th:text="${reservation.name}">Nachname</span></td>
+							<td><span th:text="${reservation.email}">E-Mail</span></td>
+							<td><span th:text="${reservation.anzahl}">Anzahl Personen</span></td>
+							<td>Nein</td>
+							<td><a class="btn btn-info">Bearbeiten</a></td>
+							<td><a class="btn btn-warning">Löschen</a></td>
+						</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>
+			<div>
+				<a class="btn btn-info" href="/add-reservation">Neue Reservation</a>
+			</div>
+			<script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+			<script src="webjars/jquery/3.3.1-2/jquery.min.js"></script>
+		</div>
+	</body>
+</html>
